@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: goany.dev
+      http:
+        paths:
+          - path: /v1/oauth/?(.*)
+            backend:
+              serviceName: ms-authentication-srv
+              servicePort: 3000
+          - path: /v1/users/?(.*)
+            backend:
+              serviceName: ms-users-srv
+              servicePort: 3000
+          - path: /v1/static/?(.*)
+            backend:
+              serviceName: ms-s3-srv
+              servicePort: 3000
+          - path: /v1/notification/?(.*)
+            backend:
+              serviceName: ms-notification-srv
+              servicePort: 3000

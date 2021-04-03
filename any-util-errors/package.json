@@ -1,0 +1,22 @@
+{
+  "name": "@hakanhueriyet/any-util-errors",
+  "version": "1.0.5",
+  "description": "Global error handler for Any",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "npm run clean && tsc",
+    "pub": "git add . && git commit -m \"Updates\" && npm version patch && npm run build && npm publish"
+  },
+  "keywords": [],
+  "author": "Hakan Hueriyet <hakanhueriyet@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "del-cli": "^3.0.1",
+    "typescript": "^3.9.7"
+  }
+}

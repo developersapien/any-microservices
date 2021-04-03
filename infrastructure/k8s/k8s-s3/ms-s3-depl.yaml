@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-s3-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: any-ms-s3
+  template:
+    metadata:
+      labels:
+        app: any-ms-s3
+    spec:
+      containers:
+        - name: any-ms-s3
+          image: goany/any-ms-s3
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://ms-nats-srv:4222"
+            - name: NATS_CLUSTER_ID
+              value: "goany"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+            - name: AWS3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-access-key
+                  key: AWS3_ACCESS_KEY
+            - name: AWS3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: s3-secret-key
+                  key: AWS3_SECRET_KEY
+            - name: AWS3_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: s3-endpoint
+                  key: AWS3_ENDPOINT
+            - name: AWS3_BUCKET
+              valueFrom:
+                secretKeyRef:
+                  name: s3-bucket
+                  key: AWS3_BUCKET
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-atlas-password
+                  key: MONGO_PASSWORD
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-atlas-username
+                  key: MONGO_USERNAME

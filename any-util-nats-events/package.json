@@ -1,0 +1,25 @@
+{
+  "name": "@hakanhueriyet/any-util-nats-events",
+  "version": "1.0.9",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "npm run clean && tsc",
+    "get-version": "echo $npm_package_version",
+    "pub": "npm version patch && npm run build && npm publish && git add . && git commit -m \"Npm package version updated to $npm_package_version\" "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-nats-streaming": "^0.3.2",
+    "del-cli": "^3.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
